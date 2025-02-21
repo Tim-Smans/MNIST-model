@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mnist-api
+spec:
+  replicas: 3  # Aantal pods
+  selector:
+    matchLabels:
+      app: mnist-api
+  template:
+    metadata:
+      labels:
+        app: mnist-api
+    spec:
+      containers:
+      - name: mnist-api
+        image: timsmans/mnist-api:latest  # Gebruik de geüploade image
+        ports:
+        - containerPort: 5000
