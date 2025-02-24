@@ -1,10 +1,10 @@
-# Use an official Python image
+# Use the python image
 FROM python:3.9
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy necessary files to the container
+# Copy the files to the container
 COPY models/mnist_model.pth mnist_model.pth
 COPY app/app.py app.py
 COPY requirements.txt requirements.txt

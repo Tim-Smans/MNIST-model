@@ -7,7 +7,7 @@ import io
 
 app = Flask(__name__)
 
-# Define the same model architecture
+# Define the same model as i used in the notebook
 class MNISTModel(nn.Module):
     def __init__(self):
         super(MNISTModel, self).__init__()
@@ -21,17 +21,17 @@ class MNISTModel(nn.Module):
     def forward(self, x):
         return self.fc(x)
 
-# Load the trained model
+# Loading the trained model, this is the file i saved in my notebook. Also setting the model to evaluation mode.
 model = MNISTModel()
 model.load_state_dict(torch.load('mnist_model.pth'))
-model.eval()  # Set the model to evaluation mode
+model.eval() 
 
-# Define the image preprocessing pipeline
+# Define the image preprocessing
 def preprocess_image(image):
-    # Convert to grayscale
+    # Convert the image to grayscale
     image = image.convert("L")
     
-    # Invert colors (MNIST has black digits on white background)
+    # Invert colors
     image = ImageOps.invert(image)
     
     # Resize and center the image
@@ -45,7 +45,7 @@ def preprocess_image(image):
         transforms.ToTensor(),
         transforms.Normalize((0.5,), (0.5,))
     ])
-    image_tensor = transform(image).unsqueeze(0)  # Add batch dimension
+    image_tensor = transform(image).unsqueeze(0) 
     return image_tensor
 
 @app.route('/predict', methods=['POST'])

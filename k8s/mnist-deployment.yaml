@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mnist-api
 spec:
-  replicas: 3  # Aantal pods
+  replicas: 3 
   selector:
     matchLabels:
       app: mnist-api
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: mnist-api
-        image: timsmans/mnist-api:latest  # Gebruik de geüploade image
+        image: timsmans/mnist-api:latest
         ports:
         - containerPort: 5000
